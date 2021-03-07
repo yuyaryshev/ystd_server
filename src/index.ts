@@ -1,3 +1,4 @@
+export * from "ystd";
 export * from "./deleteFileIfExists";
 export * from "./textDiffTool";
 export * from "./deleteFolderRecursive";
@@ -8,3 +9,4 @@ export * from "./readDirRecursive";
 export * from "./sha256";
 export * from "./yexec";
 export * from "./writeFileSyncIfChanged";
+export * from "./writeFileSerieSync";
