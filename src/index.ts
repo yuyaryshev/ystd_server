@@ -7,3 +7,4 @@ export * from "./projectDir";
 export * from "./readDirRecursive";
 export * from "./sha256";
 export * from "./yexec";
+export * from "./writeFileSyncIfChanged";
