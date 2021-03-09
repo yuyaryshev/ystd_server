@@ -10,6 +10,6 @@ export * from "./sha256";
 export * from "./yexec";
 export * from "./writeFileSyncIfChanged";
 export * from "./writeFileSerieSync";
-export * from "./babelPresetsToPlugins";
+//export * from "./babelPresetsToPlugins";
 export * from "./writeFileSerieSync";
 export * from "./refreshFileSync";
