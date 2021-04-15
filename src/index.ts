@@ -1,7 +1,6 @@
 export * from "ystd";
 
-// @INPRINT_START {exclude:"babelPresetsToPlugins"}
-export * from "./babelPresetsToPlugins";
+// @INPRINT_START {exclude:["babelPresetsToPlugins"]}
 export * from "./deleteFileIfExists";
 export * from "./deleteFolderRecursive";
 export * from "./makeFunctionCov";
@@ -14,4 +13,5 @@ export * from "./textDiffTool";
 export * from "./writeFileSerieSync";
 export * from "./writeFileSyncIfChanged";
 export * from "./yexec";
+
 // @INPRINT_END
