@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from "fs";
+import { readFileSync, outputFileSync } from "fs-extra";
 
 export const writeFileSyncIfChanged = (fileName: string, content: string) => {
     let current: string | undefined;
@@ -7,7 +7,7 @@ export const writeFileSyncIfChanged = (fileName: string, content: string) => {
     } catch (e) {}
 
     if (current !== content) {
-        writeFileSync(fileName, content, "utf-8");
+        outputFileSync(fileName, content, "utf-8");
         return true;
     }
     return false;

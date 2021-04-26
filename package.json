@@ -1,6 +1,6 @@
 {
   "name": "ystd_server",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -10,8 +10,8 @@
     "build:clean": "rm -rf ./dist/*",
     "test": "jest"
   },
-  "author": "Jan Grzegorowski",
-  "license": "MIT",
+  "author": "Yuri Yaryshev",
+  "license": "Unlicense",
   "devDependencies": {
     "@babel/core": "^7.13.8",
     "@testing-library/react": "^11.2.5",
