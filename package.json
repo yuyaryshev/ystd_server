@@ -1,6 +1,6 @@
 {
   "name": "ystd_server",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -8,7 +8,9 @@
     "build": "npm run build:clean && npm run build:ts",
     "build:ts": "npx rollup -c",
     "build:clean": "rm -rf ./dist/*",
-    "test": "jest"
+    "test": "jest",
+    "tsc": "tsc",
+    "republish": "npm run build && npm publish"
   },
   "author": "Yuri Yaryshev",
   "license": "Unlicense",
@@ -55,6 +57,7 @@
     "fs-extra": "^9.1.0",
     "javascript-stringify": "^2.0.1",
     "moment": "^2.29.1",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "ystd": "^1.0.5"
   }
 }

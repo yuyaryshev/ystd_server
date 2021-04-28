@@ -1,1 +1,1 @@
-npm run build && npm publish
+npm run republish
