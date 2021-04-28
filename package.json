@@ -6,7 +6,8 @@
   "module": "dist/index.esm.js",
   "scripts": {
     "build": "npm run build:clean && npm run build:ts",
-    "build:ts": "npx rollup -c",
+    "build_old:ts": "npx rollup -c",
+    "build:ts": "tsc",
     "build:clean": "rm -rf ./dist/*",
     "test": "jest",
     "tsc": "tsc",
