@@ -8,7 +8,7 @@ export const projectDirResolve = (suffix: string) => {
     return resolve(join(projectDir, suffix));
 };
 
-export let workDirRoot = (() => {
+export const workDirRoot = (() => {
     try {
         let r: string = resolve(__dirname || resolve("."));
         while (!existsSync(resolve(r, "package.json"))) r = resolve(join(r, ".."));

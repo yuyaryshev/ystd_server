@@ -25,20 +25,20 @@ export const babelPresetsToPlugins = (
 
 `;
 
-    let startingPath = resolve(nodeModulesBabelPath);
+    const startingPath = resolve(nodeModulesBabelPath);
     console.log(`startingPath = `, startingPath);
-    let files = readdirSync(startingPath, { withFileTypes: true });
+    const files = readdirSync(startingPath, { withFileTypes: true });
     files.map(fn => {
-        let node_module_path = join(startingPath, fn.name);
+        const node_module_path = join(startingPath, fn.name);
         if (node_module_path.includes(`\\plugin-`)) {
-            let node_module_package_path = join(node_module_path, "package.json");
+            const node_module_package_path = join(node_module_path, "package.json");
             let packageJson;
             let patch_status = "[failed         ] - ";
             try {
                 packageJson = JSON.parse(readFileSync(node_module_package_path, "utf-8"));
                 if (packageJson && packageJson.main) {
-                    let mainJsPath = join(node_module_path, packageJson.main);
-                    let mainJsContent = readFileSync(mainJsPath, "utf-8");
+                    const mainJsPath = join(node_module_path, packageJson.main);
+                    const mainJsContent = readFileSync(mainJsPath, "utf-8");
                     if (!mainJsContent.includes("runTraceCodeSnippet")) {
                         writeFileSync(mainJsPath, codeSnippet + mainJsContent, "utf-8");
                         patch_status = "[patched        ] - ";

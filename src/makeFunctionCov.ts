@@ -21,7 +21,7 @@
 
 import { sep } from "path";
 import { __FULLSOURCELOCATION__ } from "ystd";
-import { readDirRecursive } from "./readDirRecursive";
+import { readDirRecursive } from "./readDirRecursive.js";
 
 export interface FCSourceLocation {
     line: number;
@@ -43,11 +43,11 @@ export const makeFunctionCoverage = (): {
     functionCoverageData: FCData;
     functionCoverage: (offset?: number) => void;
 } => {
-    let functionCoverageData = new Map();
+    const functionCoverageData = new Map();
     return {
         functionCoverageData,
         functionCoverage: (offset: number = 0) => {
-            let loc = __FULLSOURCELOCATION__(offset + 1);
+            const loc = __FULLSOURCELOCATION__(offset + 1);
             let v = functionCoverageData.get(loc.str);
             if (!v) {
                 v = { c: 0, loc };
@@ -63,7 +63,7 @@ export const makeFunctionJournal = (): {
     functionJournalData: FCJournal;
     functionJournal: (offset?: number) => void;
 } => {
-    let functionJournalData: FCSourceLocation[] = [];
+    const functionJournalData: FCSourceLocation[] = [];
     return {
         functionJournalData,
         functionJournal: (offset: number = 0) => {
@@ -73,8 +73,8 @@ export const makeFunctionJournal = (): {
 };
 
 export const mergeFunctionCoverage = (target: FCData, source: FCData) => {
-    for (let [_, sourceItem] of source) {
-        let v = target.get(sourceItem.loc.str);
+    for (const [_, sourceItem] of source) {
+        const v = target.get(sourceItem.loc.str);
         if (!v)
             target.set(sourceItem.loc.str, {
                 c: sourceItem.c,
@@ -116,10 +116,10 @@ export const makeCoverageWithJournal = (enabled: boolean = true, basePath0?: str
 
     let basePath = basePath0;
     if (basePath && !basePath.endsWith(sep)) basePath += sep;
-    let { functionCoverageData, functionCoverage } = makeFunctionCoverage();
-    let { functionJournalData, functionJournal } = makeFunctionJournal();
+    const { functionCoverageData, functionCoverage } = makeFunctionCoverage();
+    const { functionJournalData, functionJournal } = makeFunctionJournal();
 
-    let r: FunctionCoverageWithJournal = {
+    const r: FunctionCoverageWithJournal = {
         useJournal: false,
         functionCoverageData,
         functionJournalData,
@@ -137,26 +137,26 @@ export const makeCoverageWithJournal = (enabled: boolean = true, basePath0?: str
             if (r.useJournal) functionJournal(offset + 1);
         },
         getFileCoverageEx: () => {
-            let rr: any = {};
-            for (let [_, fcItem] of r.functionCoverageData) rr[fcItem.loc.fileName] = (rr[fcItem.loc.fileName] || 0) + fcItem.c;
+            const rr: any = {};
+            for (const [_, fcItem] of r.functionCoverageData) rr[fcItem.loc.fileName] = (rr[fcItem.loc.fileName] || 0) + fcItem.c;
             return rr;
         },
         getFileCoverage: () => {
-            let r3: string[] = Object.keys(r.getFileCoverageEx()).map(a => {
+            const r3: string[] = Object.keys(r.getFileCoverageEx()).map(a => {
                 if (basePath && a.startsWith(basePath)) return a.substr(basePath.length);
                 return a;
             });
-            if (additionalFiles) for (let additionalFile of additionalFiles) r3.push(additionalFile);
+            if (additionalFiles) for (const additionalFile of additionalFiles) r3.push(additionalFile);
             r3.sort();
             return r3;
         },
         getUnusedFiles: () => {
             if (!basePath0) throw new Error(`To use this function pass in a valid basePath0 parameter to makeCoverageWithJournal`);
-            let usedFiles = r.getFileCoverage();
-            let unusedFiles: string[] = [];
+            const usedFiles = r.getFileCoverage();
+            const unusedFiles: string[] = [];
             readDirRecursive(basePath0, (path: string, filename0: any) => {
-                let filename1 = path + sep + filename0.name;
-                let filename = filename1.substr(basePath!.length);
+                const filename1 = path + sep + filename0.name;
+                const filename = filename1.substr(basePath!.length);
                 if (!usedFiles.includes(filename)) unusedFiles.push(filename);
                 return undefined;
             });
