@@ -3,6 +3,7 @@ export * from "ystd";
 // @INPRINT_START {exclude:["babelPresetsToPlugins"]}
 export * from "./deleteFileIfExists.js";
 export * from "./deleteFolderRecursive.js";
+export * from "./envFuncs.js";
 export * from "./fs-extra.js";
 export * from "./makeFunctionCov.js";
 export * from "./newSecureId.js";
