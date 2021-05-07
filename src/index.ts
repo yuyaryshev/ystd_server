@@ -7,6 +7,7 @@ export * from "./envFuncs.js";
 export * from "./fs-extra.js";
 export * from "./makeFunctionCov.js";
 export * from "./newSecureId.js";
+export * from "./parseTscOutput.js";
 export * from "./projectDir.js";
 export * from "./readDirRecursive.js";
 export * from "./refreshFileSync.js";
