@@ -1,0 +1,147 @@
+src/commonFieldGenerator.ts:4:29 - error TS2307: Cannot find module 'YDomainRuntimeCommon' or its corresponding type declarations.
+
+4 import { allDataSide } from "YDomainRuntimeCommon";
+                              ~~~~~~~~~~~~~~~~~~~~~~
+
+src/commonFieldGenerator.ts:15:22 - error TS7006: Parameter 'ds' implicitly has an 'any' type.
+
+15             .filter((ds) => !dataSides!.includes(ds) && (!domain.dataSides || domain.dataSides.includes(ds)))
+                        ~~
+
+src/commonFieldGenerator.ts:16:19 - error TS7006: Parameter 'ds' implicitly has an 'any' type.
+
+16             .map((ds) => `dataSide === "${ds}"`)
+                     ~~
+
+src/domainGenerators.ts:3:29 - error TS2307: Cannot find module 'Ydb' or its corresponding type declarations.
+
+3 import { DbTableMeta } from "Ydb";
+                              ~~~~~
+
+src/domainGenerators.ts:9:29 - error TS2307: Cannot find module 'YDomainRuntimeCommon' or its corresponding type declarations.
+
+9 import { allDataSide } from "YDomainRuntimeCommon";
+                              ~~~~~~~~~~~~~~~~~~~~~~
+
+src/domainGenerators.ts:396:32 - error TS7006: Parameter 'ds' implicitly has an 'any' type.
+
+396                       .filter((ds) => !domain.dataSides!.includes(ds))
+                                   ~~
+
+src/domainGenerators.ts:397:29 - error TS7006: Parameter 'ds' implicitly has an 'any' type.
+
+397                       .map((ds) => `dataSide === "${ds}"`)
+                                ~~
+
+src/example_pg/runSelfGrammar.ts:38:36 - error TS2339: Property 'maxP' does not exist on type 'number'.
+
+38         const np = rd.cache[p][k]?.maxP || 0;
+                                      ~~~~
+
+src/example_pg/runSelfGrammar.ts:62:11 - error TS2322: Type 'number' is not assignable to type 'ParserResult'.
+
+62     const maxPr: ParserResult = rd.cache[p][maxK]!;
+             ~~~~~
+
+src/example_pg/runSelfGrammar.ts:118:35 - error TS2339: Property 'ok' does not exist on type 'true'.
+
+118             if (!statementResult?.ok) break;
+                                      ~~
+
+src/example_pg/runSelfGrammar.ts:119:35 - error TS2345: Argument of type 'boolean' is not assignable to parameter of type 'ParserResult'.
+
+119             statementResults.push(statementResult);
+                                      ~~~~~~~~~~~~~~~
+
+src/example_pg/runSelfGrammar.ts:120:45 - error TS2339: Property 'o' does not exist on type 'true'.
+
+120             statements.push(statementResult.o);
+                                                ~
+
+src/main.ts:296:28 - error TS2339: Property 'watch' does not exist on type 'Command'.
+
+296             watch: program.watch,
+                               ~~~~~
+
+src/parser.ts:12:26 - error TS2307: Cannot find module 'YDomainRuntimeCommon' or its corresponding type declarations.
+
+12 import { DataSide } from "YDomainRuntimeCommon";
+                            ~~~~~~~~~~~~~~~~~~~~~~
+
+src/Pg/compilePgFile.ts:16:53 - error TS2305: Module '"ystd"' has no exported member 'normalizeTypescript'.
+
+16 import { afterTokenPosStr, fjmap, formatTypescript, normalizeTypescript, tokenPosStr } from "ystd";
+                                                       ~~~~~~~~~~~~~~~~~~~
+
+src/Pg/compilePgFile.ts:395:107 - error TS2339: Property 't' does not exist on type 'never'.
+
+395                     const msg = `CODE00001541 Broken link (refName=${v.refName}) target type '${v.target?.t}'`;
+                                                                                                              ~
+
+src/Pg/compilePgFile.ts:430:113 - error TS2339: Property 't' does not exist on type 'never'.
+
+430                     throw new Error(`CODE00001537 Unknown PgRef (refName=${v.refName}) target type '${v.target?.t}'`);
+                                                                                                                    ~
+
+src/Pg/compilePgFile.ts:875:70 - error TS2304: Cannot find name 'prevP'.
+
+875             ${useParserResult ? `if(!${genGetSuccessByPdiff("token", prevP)}) break;` : ""}
+                                                                         ~~~~~
+
+src/Pg/parserPgFile.ts:21:8 - error TS2339: Property 'ignoreBrokenStrings' does not exist on type 'Lexer<PgCompilationContext>'.
+
+21     rd.ignoreBrokenStrings = true;
+          ~~~~~~~~~~~~~~~~~~~
+
+src/types/baseField.ts:4:26 - error TS2307: Cannot find module 'YDomainRuntimeCommon' or its corresponding type declarations.
+
+4 import { DataSide } from "YDomainRuntimeCommon";
+                           ~~~~~~~~~~~~~~~~~~~~~~
+
+src/types/Domain.ts:3:26 - error TS2307: Cannot find module 'YDomainRuntimeCommon' or its corresponding type declarations.
+
+3 import { DataSide } from "YDomainRuntimeCommon";
+                           ~~~~~~~~~~~~~~~~~~~~~~
+
+src/types/FieldGenerator.ts:3:30 - error TS2307: Cannot find module 'Ydb' or its corresponding type declarations.
+
+3 import { DbColumnMeta } from "Ydb";
+                               ~~~~~
+
+src/types/FieldGenerator.ts:5:32 - error TS2307: Cannot find module './ydb.types' or its corresponding type declarations.
+
+5 import { YdbDomainField } from "./ydb.types";
+                                 ~~~~~~~~~~~~~
+
+src/types/GeneratorContext.ts:3:26 - error TS2307: Cannot find module 'YDomainRuntimeCommon' or its corresponding type declarations.
+
+3 import { DataSide } from "YDomainRuntimeCommon";
+                           ~~~~~~~~~~~~~~~~~~~~~~
+
+../ystd_server/dist/compilationError.d.ts:2:26 - error TS2307: Cannot find module './Severity.js' or its corresponding type declarations.
+
+2 import { Severity } from "./Severity.js";
+                           ~~~~~~~~~~~~~~~
+
+../ystd_server/dist/index.d.ts:2:1 - error TS2308: Module "ystd" has already exported a member named 'CompilationError'. Consider explicitly re-exporting to resolve the ambiguity.
+
+2 export * from "./compilationError.js";
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+../ystd_server/dist/index.d.ts:2:1 - error TS2308: Module "ystd" has already exported a member named 'afterTokenPosStr'. Consider explicitly re-exporting to resolve the ambiguity.
+
+2 export * from "./compilationError.js";
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+../ystd_server/dist/index.d.ts:2:1 - error TS2308: Module "ystd" has already exported a member named 'lexerPosStr'. Consider explicitly re-exporting to resolve the ambiguity.
+
+2 export * from "./compilationError.js";
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+../ystd_server/dist/index.d.ts:2:1 - error TS2308: Module "ystd" has already exported a member named 'tokenPosStr'. Consider explicitly re-exporting to resolve the ambiguity.
+
+2 export * from "./compilationError.js";
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Found 29 errors.

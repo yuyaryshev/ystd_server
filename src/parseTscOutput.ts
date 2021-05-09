@@ -24,9 +24,19 @@ export interface TscMessage {
     parseError?: boolean;
 }
 
-export function parseTscLog(log: string): TscMessage[] {
+export interface MissingDependencies {
+    [key: string]: string[];
+}
+
+export interface TscLog {
+    messages: TscMessage[];
+    byErrorCode: TscMessagesByErrorCode;
+    missingDependencies: MissingDependencies;
+}
+
+export function parseTscOutput(log: string): TscLog {
     const lines = log.trim().split("\r\n");
-    const tscMessages = [];
+    const messages: TscMessage[] = [];
     let totalTscMessages = 0;
     let tscFinalMessage = "";
     if (lines.length > 4) {
@@ -55,19 +65,45 @@ export function parseTscLog(log: string): TscMessage[] {
         if (parseError) tscMessage.parseError = true;
 
         if (parseError) parseErrorCnt++;
-        tscMessages.push(tscMessage);
+        messages.push(tscMessage);
     }
     if (parseErrorCnt > 0) console.warn(`WARNING! Has parseErrorCnt = ${parseErrorCnt}!`);
-    if (totalTscMessages !== tscMessages.length)
-        console.warn(`WARNING! Tsc reported ${tscFinalMessage} but I've parsed ${tscMessages.length} messages!`);
-    return tscMessages;
+    if (totalTscMessages !== messages.length) console.warn(`WARNING! Tsc reported ${tscFinalMessage} but I've parsed ${messages.length} messages!`);
+
+    const byErrorCode = groupByErrorCode(messages);
+    const missingDependencies: MissingDependencies = {};
+
+    for (const dep of messages.filter((m) => ["TS2307"].includes(m.error.code)).map(parseMissingModulesMessage)) {
+        if (!missingDependencies[dep.missingModule]) missingDependencies[dep.missingModule] = [] as string[];
+        missingDependencies[dep.missingModule].push(...dep.missingMembers);
+    }
+    for (const k in missingDependencies) missingDependencies[k] = [...new Set(missingDependencies[k])];
+    return { messages, byErrorCode, missingDependencies };
 }
 
-export function groupByErrorCode(tscMessages: TscMessage[]) {
+export interface TscMessagesByErrorCode {
+    [key: string]: { messages: TscMessage[] };
+}
+
+export function groupByErrorCode(tscMessages: TscMessage[]): TscMessagesByErrorCode {
     const groupped: any = {};
     for (const m of tscMessages) {
         if (!groupped[m.error.code]) groupped[m.error.code] = { messages: [] };
-        if (!groupped[m.error.code].messages.includes(m.error.message)) groupped[m.error.code].messages.push(m.error.message);
+        if (!groupped[m.error.code].messages.includes(m.error.message)) groupped[m.error.code].messages.push(m);
     }
     return groupped;
+}
+
+export interface MissingModule {
+    missingModule: string;
+    missingMembers: string[];
+}
+
+export function parseMissingModulesMessage(m: TscMessage): MissingModule {
+    const missingModule = m.error.message.split("'")[1];
+    const missingMembers = m.codeSample.sample
+        .split(/[{}]/)[1]
+        .split(",")
+        .map((s) => s.trim());
+    return { missingModule, missingMembers };
 }
