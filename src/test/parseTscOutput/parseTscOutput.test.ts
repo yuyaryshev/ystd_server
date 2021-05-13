@@ -8,6 +8,6 @@ describe("parseTscOutput", () => {
         const log = fs.readFileSync(logPath, `utf-8`);
         const r = parseTscOutput(log);
 
-        console.log(r.byErrorCode.TS2307);
+        console.table(r.missingDependencies);
     });
 });
