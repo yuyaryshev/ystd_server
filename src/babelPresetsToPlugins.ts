@@ -8,17 +8,17 @@ export const babelPresetsToPlugins = (
     const codeSnippet = `
 // runTraceCodeSnippet
 (() => {
-    let fs = require('fs');
+    let {readFileSync, writeFileSync} = require('fs');
     let path = require('path');
     let rtp = \`${traceFileAbsPath}\`;
     let c;
-    try { c = JSON.parse( fs.readFileSync(rtp, 'utf-8') ); } catch (e) {}
+    try { c = JSON.parse( readFileSync(rtp, 'utf-8') ); } catch (e) {}
     if(!c || !Array.isArray(c))
         c = [];
 
     if(!c.includes(__filename)) {
         c.push(__filename);
-        fs.writeFileSync(rtp, JSON.stringify(c,undefined, '    '), 'utf-8');
+        writeFileSync(rtp, JSON.stringify(c,undefined, '    '), 'utf-8');
     }
 })();
 // runTraceCodeSnippet END
