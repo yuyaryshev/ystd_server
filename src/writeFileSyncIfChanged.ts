@@ -1,4 +1,4 @@
-import { readFileSync, outputFileSync } from "./fs-extra.js";
+import { readFileSync, outputFileSync } from "fs-extra";
 
 export const writeFileSyncIfChanged = (fileName: string, content: string) => {
     let current: string | undefined;
