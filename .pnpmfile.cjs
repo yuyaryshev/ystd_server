@@ -16,7 +16,9 @@ let fs = require("fs");
 let packageJson = JSON.parse(fs.readFileSync("package.json", "utf-8"));
 let resolutions = packageJson.resolutions;
 if (packageJson.plainDependencies)
-    resolutions = Object.assign(packageJson.dependencies, packageJson.devDependencies, packageJson.resolutions);
+    {
+        resolutions = Object.assign(packageJson.dependencies, packageJson.devDependencies, packageJson.resolutions);
+    }
 
 if (packageJson.noResolution) for (let nr of packageJson.noResolution) delete resolutions[nr];
 
