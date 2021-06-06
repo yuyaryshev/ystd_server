@@ -28,7 +28,7 @@ export const babelPresetsToPlugins = (
     const startingPath = resolve(nodeModulesBabelPath);
     console.log(`startingPath = `, startingPath);
     const files = readdirSync(startingPath, { withFileTypes: true });
-    files.map(fn => {
+    files.map((fn) => {
         const node_module_path = join(startingPath, fn.name);
         if (node_module_path.includes(`\\plugin-`)) {
             const node_module_package_path = join(node_module_path, "package.json");

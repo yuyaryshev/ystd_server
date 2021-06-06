@@ -1,4 +1,4 @@
-import { exec, execSync } from "child_process";
+import { exec, execSync, ChildProcess } from "child_process";
 
 export const yexecSync = (command: string) => {
     return execSync(command, { encoding: "utf-8" });

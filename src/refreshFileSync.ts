@@ -1,4 +1,4 @@
-import {readFileSync, writeFileSync} from "fs";
+import { readFileSync, writeFileSync } from "fs";
 
 export const refreshFileSync = (filepath: string, data: string) => {
     let old_data: string = "";

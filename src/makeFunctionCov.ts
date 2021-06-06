@@ -129,7 +129,7 @@ export const makeCoverageWithJournal = (enabled: boolean = true, basePath0?: str
         },
         stopJournal: () => {
             r.useJournal = false;
-            return functionJournalData.map(item => item.str).join("\n");
+            return functionJournalData.map((item) => item.str).join("\n");
         },
 
         functionCoverage: (offset: number = 0) => {
@@ -142,7 +142,7 @@ export const makeCoverageWithJournal = (enabled: boolean = true, basePath0?: str
             return rr;
         },
         getFileCoverage: () => {
-            const r3: string[] = Object.keys(r.getFileCoverageEx()).map(a => {
+            const r3: string[] = Object.keys(r.getFileCoverageEx()).map((a) => {
                 if (basePath && a.startsWith(basePath)) return a.substr(basePath.length);
                 return a;
             });

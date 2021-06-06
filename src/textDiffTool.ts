@@ -13,5 +13,7 @@ export async function openFileDiffFromTextDiffEditor(baseFile: string, currentFi
         await execa(editorPath, [baseFile, currentFilePath]);
         return true;
     }
-    throw new Error(`CODE00000000 Path to ${text_diff_editor_npm_param_name} is not specified. Use 'npm config set ${text_diff_editor_npm_param_name} PATH_TO_EDITOR' to specify it.`)
+    throw new Error(
+        `CODE00000001 Path to ${text_diff_editor_npm_param_name} is not specified. Use 'npm config set ${text_diff_editor_npm_param_name} PATH_TO_EDITOR' to specify it.`,
+    );
 }
