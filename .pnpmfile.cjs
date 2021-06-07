@@ -16,9 +16,7 @@ let fs = require("fs");
 let packageJson = JSON.parse(fs.readFileSync("package.json", "utf-8"));
 let resolutions = packageJson.resolutions;
 if (packageJson.plainDependencies)
-    {
-        resolutions = Object.assign(packageJson.dependencies, packageJson.devDependencies, packageJson.resolutions);
-    }
+    resolutions = Object.assign(packageJson.dependencies, packageJson.devDependencies, packageJson.resolutions);
 
 if (packageJson.noResolution) for (let nr of packageJson.noResolution) delete resolutions[nr];
 
@@ -32,25 +30,32 @@ for (let k in resolutions) {
 }
 console.log(`Using pnpmfile resolutions\n\t`, resolutionsArray.join("\n"));
 
-module.exports = {
-    hooks: {
-        readPackage,
-    },
-};
+try {
+    const { ymultirepoRemap } = require("../local_packages_list");
+    module.exports = {
+        hooks: {
+            readPackage,
+        },
+    };
 
-const { ymultirepoRemap } = require("../local_packages_list");
-function readPackage(p, context) {
-    //console.log(`in readPackage\n${JSON.stringify(p, undefined, '    ')}\n\n\n`);
-    //console.log(`context\n${JSON.stringify(context, undefined, '    ')}\n\n\n`);
-    ymultirepoRemap(p, context);
-    //    if (p.dependencies)
-    //        for (let k in p.dependencies) {
-    //            const override = resolutions[k];
-    //            //console.log(`        MAYBE overriden dependency ${k} ${p.dependencies[k]} -> ${override}, ${override && p.dependencies[k] !== override}`);
-    //            if (override && p.dependencies[k] !== override) {
-    //                console.log(`        overriden dependency ${k} ${p.dependencies[k]} -> ${override}`);
-    //                p.dependencies[k] = override;
-    //            }
-    //        }
-    return p;
+    function readPackage(p, context) {
+        //console.log(`in readPackage\n${JSON.stringify(p, undefined, '    ')}\n\n\n`);
+        //console.log(`context\n${JSON.stringify(context, undefined, '    ')}\n\n\n`);
+        ymultirepoRemap(p, context);
+        //    if (p.dependencies)
+        //        for (let k in p.dependencies) {
+        //            const override = resolutions[k];
+        //            //console.log(`        MAYBE overriden dependency ${k} ${p.dependencies[k]} -> ${override}, ${override && p.dependencies[k] !== override}`);
+        //            if (override && p.dependencies[k] !== override) {
+        //                console.log(`        overriden dependency ${k} ${p.dependencies[k]} -> ${override}`);
+        //                p.dependencies[k] = override;
+        //            }
+        //        }
+        return p;
+    }
+} catch (e) {
+    if (e.code === "MODULE_NOT_FOUND" && e.message.includes("local_packages_list")) {
+        console.warn(`.pnpmfile.cjs couldn't open local_packages_list - no hooks started!`);
+    } else console.error(e);
+    module.exports = {};
 }

@@ -105,3 +105,25 @@ node_modules
 
 # TernJS port file
 .tern-port
+
+
+private.json
+private.js
+private.cjs
+settings.json
+settings.js
+settings.cjs
+
+
+
+/ts_out
+/yinstr_out
+/docs
+/out
+/ut_temp
+distCompiled
+/ut_hasty2.db
+/src/AppIDE/server/domains_gen
+/src/AppIDE/server/domains_gen
+*.parser_log
+
