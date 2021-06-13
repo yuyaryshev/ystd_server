@@ -54,7 +54,8 @@
         "clean": "yb clean_all && npm run clear:docs",
         "watch:test:cjs": "npm run build:cjs && jest --config=jest.config-cjs.cjs --passWithNoTests -w",
         "test:cjs": "npm run build:cjs && jest --config=jest.config-cjs.cjs --passWithNoTests",
-        "test:ts": "jest --config=jest.config-ts.cjs --passWithNoTests"
+        "test:ts": "jest --config=jest.config-ts.cjs --passWithNoTests",
+        "start": "node lib/cjs/start.js"
     },
     "devDependencies": {
         "@babel/cli": "7.14.3",
@@ -94,7 +95,8 @@
         "typescript": "^4.3.2",
         "sinon": "^11.1.1",
         "jest-ts-webcompat-resolver": "^1.0.0",
-        "@types/sinon": "^10.0.2"
+        "@types/sinon": "^10.0.2",
+        "modify-filepath": "^0.0.2"
     },
     "peerDependencies": {
         "ystd": ">=1.0.8"
