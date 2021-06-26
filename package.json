@@ -1,6 +1,6 @@
 {
     "name": "ystd_server",
-    "version": "1.2.4",
+    "version": "1.2.5",
     "description": "",
     "author": "Yuri Yaryshev",
     "main": "lib/cjs/index.js",

@@ -1,6 +1,6 @@
 export * from "ystd";
 
-// @INPRINT_START {exclude:["babelPresetsToPlugins"]}
+// @INPRINT_START {exclude:["projmeta", "babelPresetsToPlugins"]}
 export * from "./deleteFileIfExists.js";
 export * from "./deleteFolderRecursive.js";
 export * from "./envFuncs.js";
@@ -9,7 +9,6 @@ export * from "./makeFunctionCov.js";
 export * from "./newSecureId.js";
 export * from "./parseTscOutput.js";
 export * from "./projectDir.js";
-export * from "./projmeta.js";
 export * from "./readDirRecursive.js";
 export * from "./refreshFileSync.js";
 export * from "./sha256.js";
