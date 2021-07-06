@@ -4,6 +4,8 @@ export * from "ystd";
 export * from "./deleteFileIfExists.js";
 export * from "./deleteFolderRecursive.js";
 export * from "./envFuncs.js";
+export * from "./formatSql.js";
+export * from "./formatTypescript.js";
 export * from "./fs-extra.js";
 export * from "./makeFunctionCov.js";
 export * from "./newSecureId.js";
