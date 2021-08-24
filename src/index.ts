@@ -15,6 +15,7 @@ export * from "./readDirRecursive.js";
 export * from "./refreshFileSync.js";
 export * from "./sha256.js";
 export * from "./textDiffTool.js";
+export * from "./utFileCheck.js";
 export * from "./writeFileSerieSync.js";
 export * from "./writeFileSyncIfChanged.js";
 export * from "./yexec.js";

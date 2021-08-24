@@ -1,23 +1,24 @@
 {
-    "x": 0,
-    "y": 0,
-    "height": 100,
-    "width": 500,
-    "wins": {
-		"webstorm":{"app":true, "cmd":"D:\\ProgsReady\\IntellijIdeaUI\\bin\\idea64.exe"},
-        "watch": { "no_run": false, "cmd":"cls & npm run ycplmon & npm run watch"},
-        "ycplmon": { "no_run": true, "cmd": "cls & npm run ycplmon"},
-        "git_pull": { "no_run": true, "cmd":"git checkout -- src/cpl.json & git pull"}
+  "x": 0,
+  "wins": {
+    "ide": { "app": true, "cmd": "D:\\ProgsReady\\IntellijIdeaUI\\bin\\idea64.exe" },
+    "watch": {
+      "cmd": "cls && npm run precompile && npm run watch:cjs",
+      "no_run": false
     },
-    "wins_DISABLED": {
-        "watch_gen": { "no_run": true, "cmd": "cls & npm run ycplmon &  watch_gen"},
-        "ycplmon": { "no_run": true, "cmd": "cls & npm run ycplmon &  npm run ycplmon"},
-        "tsc": { "no_run": true, "cmd": "cls & npm run ycplmon &  npm run ycplmon && tsc --watch" },
-        "verdaccio": "cls & npm run ycplmon &  verdaccio",
-        "git_status": "git status",
-        "ide_web": {"no_run":true, "cmd":"cls & npm run ycplmon & npm run ide_web"},
-        "yinstr": { "no_run": true, "cmd":"cls & npm run ycplmon & npm run yinstr:src"},
-        "clear_gen": { "no_run": true, "cmd": "cls & npm run ycplmon & rebuild_gen" },
-        "node": { "no_run": true, "cmd": "cls & npm run ycplmon & node"}
+    "precompile": {
+      "cmd": "cls && npm run precompile",
+      "no_run": true
     }
+  },
+  "disabled": {
+    "watch_test_cjs": {
+      "cmd": "cls && npm run watch:test:cjs",
+      "no_run": true
+    },
+    "node": {
+      "cmd": "cls && npm run precompile && node",
+      "no_run": true
+    }
+  }
 }
