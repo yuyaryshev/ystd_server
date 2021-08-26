@@ -1,6 +1,6 @@
 {
     "name": "ystd_server",
-    "version": "1.3.0",
+    "version": "1.3.1",
     "description": "",
     "author": "Yuri Yaryshev",
     "main": "lib/cjs/index.js",
@@ -75,13 +75,16 @@
         "@babel/plugin-transform-typescript": "^7.14.6",
         "@microsoft/api-documenter": "^7.13.28",
         "@microsoft/api-extractor": "^7.17.1",
+        "@types/chai": "^4.2.19",
         "@types/jest": "^26.0.23",
+        "@types/sinon": "^10.0.2",
         "@typescript-eslint/eslint-plugin": "^4.28.2",
         "@typescript-eslint/parser": "^4.28.2",
         "babel-loader": "^8.2.2",
         "babel-plugin-inline-replace-variables": "^1.3.1",
         "babel-plugin-module-resolver": "^4.1.0",
         "babel-watch": "^7.4.1",
+        "chai": "^4.3.4",
         "cross-env": "^7.0.3",
         "eslint": "^7.30.0",
         "eslint-config-prettier": "^8.3.0",
@@ -91,21 +94,18 @@
         "eslint-plugin-tsdoc": "^0.2.14",
         "javascript-stringify": "^2.1.0",
         "jest": "^27.0.6",
+        "jest-ts-webcompat-resolver": "^1.0.0",
         "json5": "^2.2.0",
+        "mocha": "^9.0.2",
+        "modify-filepath": "^1.1.0",
         "prettier": "^2.3.2",
         "pretty-quick": "^3.1.1",
+        "sinon": "^11.1.1",
+        "source-map-support": "^0.5.19",
         "ts-jest": "^27.0.3",
         "tslib": "^2.3.0",
         "typescript": "^4.3.5",
-        "sinon": "^11.1.1",
-        "jest-ts-webcompat-resolver": "^1.0.0",
-        "@types/sinon": "^10.0.2",
-        "modify-filepath": "^1.1.0",
-        "yyabuilder": "^1.1.4",
-        "@types/chai": "^4.2.19",
-        "chai": "^4.3.4",
-        "mocha": "^9.0.2",
-        "source-map-support": "^0.5.19"
+        "yyabuilder": "^1.1.4"
     },
     "peerDependencies": {
         "ystd": ">=1.0.8"
@@ -119,8 +119,9 @@
         "fast-deep-equal": "^3.1.3",
         "fs-extra": "^10.0.0",
         "javascript-stringify": "^2.1.0",
+        "js-stringify": "^1.0.2",
         "moment": "^2.29.1",
         "uuid": "^8.3.2",
-        "ystd": "^1.0.15"
+        "ystd": "*"
     }
 }
