@@ -1,3 +1,5 @@
+import stripColor from "strip-color";
+
 export interface TscMessageLocation {
     filepath: string;
     filename: string;
@@ -19,7 +21,7 @@ export interface TscMessageCodeSample {
 export interface TscMessage {
     location: TscMessageLocation;
     error: TscMessageError;
-    codeSample: TscMessageCodeSample;
+    codeSample?: TscMessageCodeSample;
     logChunk: string[];
     parseError?: boolean;
 }
@@ -35,7 +37,56 @@ export interface TscLog {
 }
 
 export function parseTscOutput(log: string): TscLog {
-    const lines = log.trim().split("\r\n");
+    const messages = parseTscOutputInFormatInPrettyFormat(log);
+    const byErrorCode = groupByErrorCode(messages);
+    const missingDependencies: MissingDependencies = {};
+
+    for (const dep of messages.filter((m) => ["TS2307"].includes(m.error.code)).map(parseMissingModulesMessage)) {
+        if (!missingDependencies[dep.missingModule]) missingDependencies[dep.missingModule] = [] as string[];
+        missingDependencies[dep.missingModule].push(...dep.missingMembers);
+    }
+    for (const k in missingDependencies) missingDependencies[k] = [...new Set(missingDependencies[k])];
+    return { messages, byErrorCode, missingDependencies };
+}
+
+export function parseTscOutputInFormatNonPretty(log: string): TscMessage[] {
+    const lines = log.trim().split(/\r?\n/);
+    const messages: TscMessage[] = [];
+    let totalTscMessages = 0;
+
+    let prevMessage: TscMessage | undefined;
+    for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
+        const line = lines[lineIndex];
+        if (line.startsWith("  ")) {
+            if (prevMessage) {
+                prevMessage.error.message += "\n";
+                prevMessage.error.message += line;
+            }
+            continue;
+        }
+
+        const [fileAndLoc, rest1] = line.split("): error TS");
+        const fpos = fileAndLoc.lastIndexOf("(");
+        const filepathArray = fileAndLoc.substr(0, fpos).split("/");
+        const [lineNum, pos] = fileAndLoc.substr(fpos + 1).split(",");
+        const message = "TS" + rest1;
+        const fullname = filepathArray.pop()!;
+        const filepath = filepathArray.join("/");
+        const [filename, ext] = fullname.split(".");
+        const code = message.split(" ")[0];
+        const location = { filepath, filename, ext, fullname, fileAndLoc };
+        const error = { code, message };
+        const logChunk = [line];
+        const tscMessage: TscMessage = { location, error, logChunk };
+        totalTscMessages++;
+        messages.push(tscMessage);
+    }
+
+    return messages;
+}
+
+export function parseTscOutputInFormatInPrettyFormat(log: string): TscMessage[] {
+    const lines = stripColor(log).trim().split(/\r?\n/);
     const messages: TscMessage[] = [];
     let totalTscMessages = 0;
     let tscFinalMessage = "";
@@ -67,18 +118,8 @@ export function parseTscOutput(log: string): TscLog {
         if (parseError) parseErrorCnt++;
         messages.push(tscMessage);
     }
-    if (parseErrorCnt > 0) console.warn(`WARNING! Has parseErrorCnt = ${parseErrorCnt}!`);
-    if (totalTscMessages !== messages.length) console.warn(`WARNING! Tsc reported ${tscFinalMessage} but I've parsed ${messages.length} messages!`);
 
-    const byErrorCode = groupByErrorCode(messages);
-    const missingDependencies: MissingDependencies = {};
-
-    for (const dep of messages.filter((m) => ["TS2307"].includes(m.error.code)).map(parseMissingModulesMessage)) {
-        if (!missingDependencies[dep.missingModule]) missingDependencies[dep.missingModule] = [] as string[];
-        missingDependencies[dep.missingModule].push(...dep.missingMembers);
-    }
-    for (const k in missingDependencies) missingDependencies[k] = [...new Set(missingDependencies[k])];
-    return { messages, byErrorCode, missingDependencies };
+    return messages;
 }
 
 export interface TscMessagesByErrorCode {
@@ -101,9 +142,14 @@ export interface MissingModule {
 
 export function parseMissingModulesMessage(m: TscMessage): MissingModule {
     const missingModule = m.error.message.split("'")[1];
-    const missingMembers = m.codeSample.sample
-        .split(/[{}]/)[1]
-        .split(",")
-        .map((s) => s.trim());
+    const sample = m?.codeSample?.sample || "";
+    const sampleWoImport = sample.indexOf("import") ? sample.substr(sample.indexOf("import") + 7).trim() : sample;
+    const membersStr = sampleWoImport.substr(0, sampleWoImport.lastIndexOf("from") || sampleWoImport.length).trim();
+    const missingMembers = membersStr.length
+        ? membersStr
+              .split(/[{},]/)
+              .map((s) => s.split(" as ")[0].trim())
+              .filter((s) => s.length)
+        : [];
     return { missingModule, missingMembers };
 }
