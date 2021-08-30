@@ -5,6 +5,16 @@
         "pos": 549
     },
     {
+        "cpl": 343,
+        "filePath": "src\\serverSettings.ts",
+        "pos": 776
+    },
+    {
+        "cpl": 344,
+        "filePath": "src\\serverSettings.ts",
+        "pos": 1162
+    },
+    {
         "cpl": 1,
         "filePath": "src\\textDiffTool.ts",
         "pos": 799

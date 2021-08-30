@@ -16,6 +16,7 @@ export * from "./parseTscOutput.js";
 export * from "./projectDir.js";
 export * from "./readDirRecursive.js";
 export * from "./refreshFileSync.js";
+export * from "./serverSettings.js";
 export * from "./sha256.js";
 export * from "./textDiffTool.js";
 export * from "./traceUsedFile.js";

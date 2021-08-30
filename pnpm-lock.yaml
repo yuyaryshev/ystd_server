@@ -16,6 +16,7 @@ specifiers:
   '@microsoft/api-extractor': ^7.17.1
   '@mojotech/json-type-validation': ^3.1.0
   '@types/chai': ^4.2.19
+  '@types/debug': ^4.1.7
   '@types/fs-extra': ^9.0.11
   '@types/jest': ^26.0.23
   '@types/sinon': ^10.0.2
@@ -29,6 +30,7 @@ specifiers:
   babel-watch: ^7.4.1
   chai: ^4.3.4
   cross-env: ^7.0.3
+  debug: ^4.3.2
   deepmerge: ^4.2.2
   eslint: ^7.30.0
   eslint-config-prettier: ^8.3.0
@@ -61,9 +63,11 @@ specifiers:
 
 dependencies:
   '@mojotech/json-type-validation': 3.1.0
+  '@types/debug': 4.1.7
   '@types/fs-extra': 9.0.11
   '@types/strip-color': 0.1.0
   app-root-path: 3.0.0
+  debug: 4.3.2
   deepmerge: 4.2.2
   execa: 5.1.1
   fast-deep-equal: 3.1.3
@@ -1233,6 +1237,12 @@ packages:
     resolution: {integrity: sha512-jRJgpRBuY+7izT7/WNXP/LsMO9YonsstuL+xuvycDyESpoDoIAsMd7suwpB4h9oEWB+ZlPTqJJ8EHomzNhwTPQ==}
     dev: true
 
+  /@types/debug/4.1.7:
+    resolution: {integrity: sha512-9AonUzyTjXXhEOa0DnqpzZi6VHlqKMswga9EXjpXnnqxwLtdvPPtlO8evrI5D9S6asFRCQ6v+wpiUKbw+vKqyg==}
+    dependencies:
+      '@types/ms': 0.7.31
+    dev: false
+
   /@types/fs-extra/9.0.11:
     resolution: {integrity: sha512-mZsifGG4QeQ7hlkhO56u7zt/ycBgGxSVsFI/6lGTU34VtwkiqrrSDgw0+ygs8kFGWcXnFQWMrzF2h7TtDFNixA==}
     dependencies:
@@ -1279,6 +1289,10 @@ packages:
   /@types/minimatch/3.0.4:
     resolution: {integrity: sha512-1z8k4wzFnNjVK/tlxvrWuK5WMt6mydWWP7+zvH5eFep4oj+UkrfiJTRtjCeBXNpwaA/FYqqtb4/QS4ianFpIRA==}
     dev: true
+
+  /@types/ms/0.7.31:
+    resolution: {integrity: sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==}
+    dev: false
 
   /@types/node/10.17.13:
     resolution: {integrity: sha512-pMCcqU2zT4TjqYFrWtYHKal7Sl30Ims6ulZ4UFXxI4xbtQqK/qqKwkDoBFCfooRqqmRu9vY3xaJRwxSh673aYg==}
@@ -2241,6 +2255,18 @@ packages:
       ms: 2.1.2
       supports-color: 8.1.1
     dev: true
+
+  /debug/4.3.2:
+    resolution: {integrity: sha512-mOp8wKcvj7XxC78zLgw/ZA+6TSgkoE2C/ienthhRD298T7UNwAg9diBpLRxC0mOezLl4B0xV7M0cCO6P/O0Xhw==}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+    dependencies:
+      ms: 2.1.2
+    dev: false
 
   /decamelize/4.0.0:
     resolution: {integrity: sha512-9iE1PgSik9HeIIw2JO94IidnE3eBoQrFJ3w7sFuzSX4DpmZ3v5sZpUiV5Swcf6mQEF+Y0ru8Neo+p+nyh2J+hQ==}
@@ -4493,7 +4519,6 @@ packages:
 
   /ms/2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
-    dev: true
 
   /ms/2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
