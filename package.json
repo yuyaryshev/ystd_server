@@ -19,7 +19,7 @@
     },
     "license": "Unlicense",
     "publishConfig": {
-        "registry": "http://registry.npmjs.org"
+        "registry": "https://registry.npmjs.org"
     },
     "jest": {
         "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
