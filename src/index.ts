@@ -21,6 +21,8 @@ export * from "./sha256.js";
 export * from "./textDiffTool.js";
 export * from "./traceUsedFile.js";
 export * from "./utFileCheck.js";
+export * from "./writeFileIfChanged.js";
+export * from "./writeFileSerie.js";
 export * from "./writeFileSerieSync.js";
 export * from "./writeFileSyncIfChanged.js";
 export * from "./yexec.js";

@@ -14,7 +14,7 @@ export const utFileCheck = (name: string, v: string, expectedSha256: string) => 
     let original = "";
     try {
         original = readFileSync(filepath, "utf-8");
-    } catch (e) {
+    } catch (e: any) {
         if (e.code !== "ENOENT") throw e;
     }
 
