@@ -2,6 +2,7 @@
     "name": "ystd_server",
     "version": "1.3.4",
     "description": "",
+    "isApp": false,
     "author": "Yuri Yaryshev",
     "main": "lib/cjs/index.js",
     "module": "lib/esm/index.js",
@@ -64,7 +65,8 @@
         "watch:test:cjs_mocha": "mocha './lib/cjs/**/*.test.js' -w",
         "watch:test:cjs_jest": "jest --config=jest.config-cjs.cjs --passWithNoTests --runInBand -w",
         "test:cjs_jest": "npm run build:cjs && jest --config=jest.config-cjs.cjs --passWithNoTests --runInBand",
-        "test:cjs_mocha": "npm run build:cjs && mocha './lib/cjs/**/*.test.js'"
+        "test:cjs_mocha": "npm run build:cjs && mocha './lib/cjs/**/*.test.js'",
+        "nodemon:backend": "nodemon -w ./lib/cjs/server ./lib/cjs/server/start.js"
     },
     "devDependencies": {
         "@babel/cli": "7.15.7",
