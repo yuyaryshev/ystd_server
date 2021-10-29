@@ -1,6 +1,6 @@
 import { resolve } from "path";
 import { readFileSync } from "fs";
-import { parse } from "JSON5";
+import { parse } from "json5";
 import debugjs from "debug";
 
 let debug = debugjs("server.startup");
