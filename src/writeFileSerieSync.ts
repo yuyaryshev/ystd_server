@@ -1,4 +1,4 @@
-import { outputFileSync, readdirSync, unlinkSync } from "./fs-extra.js";
+import { outputFileSync, readdirSync, unlinkSync } from "fs-extra";
 import { join } from "path";
 
 export const writeFileSerieSync = (seriePath: string, fileName: string, content: string, maxFiles: number | undefined) => {

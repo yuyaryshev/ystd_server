@@ -1,4 +1,4 @@
-import { outputFile, readdir, unlink } from "./fs-extra.js";
+import { outputFile, readdir, unlink } from "fs-extra";
 import { join } from "path";
 
 export const writeFileSerie = async (seriePath: string, fileName: string, content: string, maxFiles: number | undefined) => {

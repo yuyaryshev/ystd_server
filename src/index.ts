@@ -8,7 +8,6 @@ export * from "./elvis_test.js";
 export * from "./envFuncs.js";
 export * from "./formatSql.js";
 export * from "./formatTypescript.js";
-export * from "./fs-extra.js";
 export * from "./getMissingPackages.js";
 export * from "./makeFunctionCov.js";
 export * from "./newSecureId.js";
