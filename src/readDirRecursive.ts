@@ -25,7 +25,7 @@ export interface DirentWithPath extends Dirent {
     path: string;
 }
 
-interface readDirRecursiveToArrayOpts {
+export interface ReadDirRecursiveToArrayOpts {
     removeDirectories?: boolean;
     removeNonDirectories?: boolean;
     allowedExts?: string[];
@@ -40,7 +40,7 @@ function readDirRecursiveToArrayInternal(path: string, arr: DirentWithPath[]) {
     }
 }
 
-export function readDirRecursiveToArray(path: string, opts?: readDirRecursiveToArrayOpts): DirentWithPath[] {
+export function readDirRecursiveToArray(path: string, opts?: ReadDirRecursiveToArrayOpts): DirentWithPath[] {
     const arr: DirentWithPath[] = [];
     readDirRecursiveToArrayInternal(path, arr);
 
@@ -64,6 +64,6 @@ export function readDirRecursiveToArray(path: string, opts?: readDirRecursiveToA
     return arr2;
 }
 
-export function readDirRecursiveToStrArray(path: string, opts?: readDirRecursiveToArrayOpts): string[] {
+export function readDirRecursiveToStrArray(path: string, opts?: ReadDirRecursiveToArrayOpts): string[] {
     return readDirRecursiveToArray(path, opts).map((dirent) => dirent.path);
 }
