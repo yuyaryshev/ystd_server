@@ -24,6 +24,6 @@ export function expectDeepEqualFolders(etalonFolder0: string, actualFolder0: str
     for (const relFilePath of etalonFiles) {
         const etalonStr = readFileSync(join(etalonFolder, relFilePath), "utf-8");
         const actualStr = readFileSync(join(actualFolder, relFilePath), "utf-8");
-        expect(actualStr).to.deep.equal(etalonStr);
+        expect(relFilePath+"\n"+actualStr).to.deep.equal(relFilePath+"\n"+etalonStr);
     }
 }
