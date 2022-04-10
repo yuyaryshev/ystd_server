@@ -5,7 +5,15 @@ import { readFileSync } from "fs-extra";
 import { join } from "path";
 import { toLinuxLikePath } from "./toLinuxPath.js";
 
-export function expectDeepEqualFolders(etalonFolder0: string, actualFolder0: string, readDirOpts0?: ReadDirRecursiveToArrayOpts) {
+export type DeepEqualFoldersReplacer = (s: string) => string;
+const noopReplacer = (s: string) => s;
+
+export function expectDeepEqualFolders(
+    etalonFolder0: string,
+    actualFolder0: string,
+    readDirOpts0?: ReadDirRecursiveToArrayOpts,
+    replacer: DeepEqualFoldersReplacer = noopReplacer,
+) {
     const readDirOpts: ReadDirRecursiveToArrayOpts = { ...(readDirOpts0 || {}), removeDirectories: true };
     const etalonFolder = toLinuxLikePath(etalonFolder0);
     const actualFolder = toLinuxLikePath(actualFolder0);
@@ -19,11 +27,12 @@ export function expectDeepEqualFolders(etalonFolder0: string, actualFolder0: str
     );
     actualFiles.sort();
 
-    expect(actualFiles).to.deep.equal(etalonFiles);
+    // expect("File paths:"+actualFiles.join("\n")).to.deep.equal("File paths:"+etalonFiles.join("\n"));
 
     for (const relFilePath of etalonFiles) {
-        const etalonStr = readFileSync(join(etalonFolder, relFilePath), "utf-8");
-        const actualStr = readFileSync(join(actualFolder, relFilePath), "utf-8");
-        expect(relFilePath+"\n"+actualStr).to.deep.equal(relFilePath+"\n"+etalonStr);
+        const etalonStr = replacer(readFileSync(join(etalonFolder, relFilePath), "utf-8"));
+        const actualStr = replacer(readFileSync(join(actualFolder, relFilePath), "utf-8"));
+        expect(relFilePath + "\n" + actualStr).to.deep.equal(relFilePath + "\n" + etalonStr);
     }
+    expect("File paths:" + actualFiles.join("\n")).to.deep.equal("File paths:" + etalonFiles.join("\n"));
 }

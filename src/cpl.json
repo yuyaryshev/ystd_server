@@ -1,27 +1,27 @@
 [
- {
-  "cpl": 287,
-  "filePath": "src\\projectDir.ts",
-  "pos": 549
- },
- {
-  "cpl": 343,
-  "filePath": "src\\serverSettings.ts",
-  "pos": 710
- },
- {
-  "cpl": 344,
-  "filePath": "src\\serverSettings.ts",
-  "pos": 893
- },
- {
-  "cpl": 288,
-  "filePath": "src\\serverSettings.ts",
-  "pos": 1136
- },
- {
-  "cpl": 1,
-  "filePath": "src\\textDiffTool.ts",
-  "pos": 799
- }
+    {
+        "cpl": 287,
+        "filePath": "src\\projectDir.ts",
+        "pos": 549
+    },
+    {
+        "cpl": 343,
+        "filePath": "src\\serverSettings.ts",
+        "pos": 710
+    },
+    {
+        "cpl": 344,
+        "filePath": "src\\serverSettings.ts",
+        "pos": 893
+    },
+    {
+        "cpl": 288,
+        "filePath": "src\\serverSettings.ts",
+        "pos": 1136
+    },
+    {
+        "cpl": 1,
+        "filePath": "src\\textDiffTool.ts",
+        "pos": 799
+    }
 ]
