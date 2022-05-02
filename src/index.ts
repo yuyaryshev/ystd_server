@@ -11,6 +11,7 @@ export * from "./formatSql.js";
 export * from "./formatTypescript.js";
 export * from "./getMissingPackages.js";
 export * from "./makeFunctionCov.js";
+export * from "./md5.js";
 export * from "./newSecureId.js";
 export * from "./parseTscOutput.js";
 export * from "./projectDir.js";
