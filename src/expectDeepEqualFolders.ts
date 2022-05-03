@@ -8,6 +8,14 @@ import { toLinuxLikePath } from "./toLinuxPath.js";
 export type DeepEqualFoldersReplacer = (s: string) => string;
 const noopReplacer = (s: string) => s;
 
+function readFileSyncForCheck(path: string, encoding?: any): string {
+    try {
+        return readFileSync(path, encoding || "utf-8") as any;
+    } catch (e: any) {
+        return "ERROR:" + e.message;
+    }
+}
+
 export function expectDeepEqualFolders(
     etalonFolder0: string,
     actualFolder0: string,
@@ -30,8 +38,8 @@ export function expectDeepEqualFolders(
     // expect("File paths:"+actualFiles.join("\n")).to.deep.equal("File paths:"+etalonFiles.join("\n"));
 
     for (const relFilePath of etalonFiles) {
-        const etalonStr = replacer(readFileSync(join(etalonFolder, relFilePath), "utf-8"));
-        const actualStr = replacer(readFileSync(join(actualFolder, relFilePath), "utf-8"));
+        const etalonStr = replacer(readFileSyncForCheck(join(etalonFolder, relFilePath), "utf-8"));
+        const actualStr = replacer(readFileSyncForCheck(join(actualFolder, relFilePath), "utf-8"));
         expect(relFilePath + "\n" + actualStr).to.deep.equal(relFilePath + "\n" + etalonStr);
     }
     expect("File paths:" + actualFiles.join("\n")).to.deep.equal("File paths:" + etalonFiles.join("\n"));
