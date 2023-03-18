@@ -29,22 +29,28 @@ export interface ReadDirRecursiveToArrayOpts {
     removeDirectories?: boolean;
     removeNonDirectories?: boolean;
     allowedExts?: string[];
+    ignoredNames?: string[];
 }
 
-function readDirRecursiveToArrayInternal(path: string, arr: DirentWithPath[]) {
+function readDirRecursiveToArrayInternal(path: string, arr: DirentWithPath[], ignoredNamesSet: Set<string>) {
     const files = readdirSync(path, { withFileTypes: true });
     for (const dirent of files) {
         (dirent as any).path = joinPath(path, dirent.name);
         arr.push(dirent as any);
-        if (dirent.isDirectory()) readDirRecursiveToArrayInternal(joinPath(path, dirent.name), arr);
+        if (dirent.isDirectory() && !ignoredNamesSet.has(dirent.name)) {
+            readDirRecursiveToArrayInternal(joinPath(path, dirent.name), arr, ignoredNamesSet);
+        }
     }
 }
 
 export function readDirRecursiveToArray(path: string, opts?: ReadDirRecursiveToArrayOpts): DirentWithPath[] {
     const arr: DirentWithPath[] = [];
-    readDirRecursiveToArrayInternal(path, arr);
 
-    const { removeDirectories, removeNonDirectories, allowedExts } = opts || {};
+    const { removeDirectories, removeNonDirectories, allowedExts, ignoredNames } = opts || {};
+    const ignoredNamesSet = new Set(ignoredNames);
+
+    readDirRecursiveToArrayInternal(path, arr, ignoredNamesSet);
+
     if (!removeDirectories && !removeNonDirectories && !allowedExts) {
         return arr;
     }
@@ -64,6 +70,13 @@ export function readDirRecursiveToArray(path: string, opts?: ReadDirRecursiveToA
     return arr2;
 }
 
-export function readDirRecursiveToStrArray(path: string, opts?: ReadDirRecursiveToArrayOpts): string[] {
+export function readDirRecursiveToStrArray(path: string | string[], opts?: ReadDirRecursiveToArrayOpts): string[] {
+    if (Array.isArray(path)) {
+        const r: string[] = [];
+        for (const path2 of path) {
+            r.push(...readDirRecursiveToArray(path2, opts).map((dirent) => dirent.path));
+        }
+        return r;
+    }
     return readDirRecursiveToArray(path, opts).map((dirent) => dirent.path);
 }
