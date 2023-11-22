@@ -25,6 +25,7 @@ export function emptyEnv(): EnvBase {
 }
 
 export function mergeEnv<T1, T2>(existingEnv: T1 | undefined, addedEnv: T2): T1 & T2 {
+    // @ts-ignore
     const pthis = Object.assign(existingEnv || {}, deepMerge(addedEnv, existingEnv || {}));
     return pthis as any as T1 & T2;
 }

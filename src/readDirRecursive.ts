@@ -3,6 +3,17 @@ import { join as joinPath } from "path";
 
 export type ReadDirCallback = (path: string, filename: Dirent) => true | false | undefined | void;
 
+export function pathToPosix(s: string): string {
+    return s.split("\\").join("/");
+}
+export function pathToPosixWithCond(s: string, cond: boolean): string {
+    return cond ? s.split("\\").join("/") : s;
+}
+
+export function joinPathMaybePosix(a: string, b: string, posixCond: boolean) {
+    return pathToPosixWithCond(joinPath(a, b), posixCond);
+}
+
 export const readDirRecursive = (path: string, v_callback: ReadDirCallback) => {
     const files = readdirSync(path, { withFileTypes: true });
     for (const dirent of files) {
@@ -30,15 +41,16 @@ export interface ReadDirRecursiveToArrayOpts {
     removeNonDirectories?: boolean;
     allowedExts?: string[];
     ignoredNames?: string[];
+    posix?: boolean;
 }
 
-function readDirRecursiveToArrayInternal(path: string, arr: DirentWithPath[], ignoredNamesSet: Set<string>) {
+function readDirRecursiveToArrayInternal(path: string, arr: DirentWithPath[], ignoredNamesSet: Set<string>, posixCond: boolean) {
     const files = readdirSync(path, { withFileTypes: true });
     for (const dirent of files) {
-        (dirent as any).path = joinPath(path, dirent.name);
+        (dirent as any).path = joinPathMaybePosix(path, dirent.name, posixCond);
         arr.push(dirent as any);
         if (dirent.isDirectory() && !ignoredNamesSet.has(dirent.name)) {
-            readDirRecursiveToArrayInternal(joinPath(path, dirent.name), arr, ignoredNamesSet);
+            readDirRecursiveToArrayInternal(joinPathMaybePosix(path, dirent.name, posixCond), arr, ignoredNamesSet, posixCond);
         }
     }
 }
@@ -46,10 +58,10 @@ function readDirRecursiveToArrayInternal(path: string, arr: DirentWithPath[], ig
 export function readDirRecursiveToArray(path: string, opts?: ReadDirRecursiveToArrayOpts): DirentWithPath[] {
     const arr: DirentWithPath[] = [];
 
-    const { removeDirectories, removeNonDirectories, allowedExts, ignoredNames } = opts || {};
+    const { removeDirectories, removeNonDirectories, allowedExts, ignoredNames, posix } = opts || {};
     const ignoredNamesSet = new Set(ignoredNames);
 
-    readDirRecursiveToArrayInternal(path, arr, ignoredNamesSet);
+    readDirRecursiveToArrayInternal(path, arr, ignoredNamesSet, !!posix);
 
     if (!removeDirectories && !removeNonDirectories && !allowedExts) {
         return arr;

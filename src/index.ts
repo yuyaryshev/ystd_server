@@ -19,6 +19,7 @@ export * from "./readDirRecursive.js";
 export * from "./refreshFileSync.js";
 export * from "./serverSettings.js";
 export * from "./sha256.js";
+export * from "./sleep.js";
 export * from "./textDiffTool.js";
 export * from "./toLinuxPath.js";
 export * from "./traceUsedFile.js";
